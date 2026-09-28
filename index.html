@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LUMÉA Cosmetics</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root{
+--cream:#fffaf7;
+--pink:#ead1cc;
+--dark:#2d2424;
+--muted:#756767;
+--accent:#b86f70;
+--white:#fff;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:var(--cream);
+color:var(--dark);
+line-height:1.6;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button{
+font-family:inherit;
+cursor:pointer;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:1000;
+height:75px;
+background:rgba(255,250,247,.97);
+border-bottom:1px solid #eadeda;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 5%;
+}
+
+.logo{
+font-family:Georgia,serif;
+font-size:27px;
+font-weight:bold;
+letter-spacing:4px;
+}
+
+nav{
+display:flex;
+align-items:center;
+gap:20px;
+font-size:13px;
+}
+
+nav a{
+transition:.3s;
+}
+
+nav a:hover{
+color:var(--accent);
+}
+
+.cart-link{
+border:1px solid var(--dark);
+padding:8px 14px;
+border-radius:25px;
+}
+
+.menu{
+display:none;
+border:0;
+background:none;
+font-size:26px;
+}
+
+.page{
+display:none;
+}
+
+.page.active{
+display:block;
+}
+
+/* HERO */
+
+.hero{
+min-height:calc(100vh - 75px);
+display:grid;
+grid-template-columns:1fr 1fr;
+background:var(--pink);
+}
+
+.hero-content{
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:10%;
+}
+
+.eyebrow{
+font-size:12px;
+letter-spacing:3px;
+text-transform:uppercase;
+}
+
+h1{
+font-family:Georgia,serif;
+font-size:clamp(50px,7vw,90px);
+font-weight:normal;
+line-height:.98;
+margin:20px 0;
+}
+
+.hero-content p:not(.eyebrow){
+max-width:500px;
+color:var(--muted);
+}
+
+.hero-image{
+min-height:650px;
+background:
+url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1000&q=85")
+center/cover;
+border-radius:0 0 0 220px;
+}
+
+/* GENERAL */
+
+section{
+padding:90px 7%;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:50px;
+}
+
+.section-title h2{
+font-family:Georgia,serif;
+font-size:45px;
+font-weight:normal;
+margin:10px 0;
+}
+
+.section-title p:last-child{
+color:var(--muted);
+}
+
+.btn{
+display:inline-block;
+background:var(--dark);
+color:white;
+padding:13px 27px;
+border-radius:30px;
+border:0;
+margin-top:20px;
+transition:.3s;
+}
+
+.btn:hover{
+background:var(--accent);
+}
+
+/* CATEGORIES */
+
+.categories{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+.category{
+height:360px;
+display:flex;
+align-items:flex-end;
+padding:25px;
+color:white;
+background-size:cover;
+background-position:center;
+position:relative;
+overflow:hidden;
+}
+
+.category:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(
+transparent,
+rgba(0,0,0,.7)
+);
+}
+
+.category h3{
+position:relative;
+z-index:2;
+font:32px Georgia,serif;
+}
+
+.makeup{
+background-image:url(
+"https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=85"
+);
+}
+
+.skincare{
+background-image:url(
+"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=900&q=85"
+);
+}
+
+.fragrance{
+background-image:url(
+"https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=85"
+);
+}
+
+/* PRODUCTS */
+
+.product-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+}
+
+.product-card{
+background:white;
+padding-bottom:20px;
+}
+
+.product-card img{
+width:100%;
+height:300px;
+object-fit:cover;
+}
+
+.product-card h3{
+font-size:17px;
+margin:15px 15px 3px;
+}
+
+.product-card p{
+margin:0 15px;
+color:var(--accent);
+font-weight:bold;
+}
+
+/* ABOUT */
+
+.about-section{
+background:#ead6d0;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.about-section img{
+width:100%;
+height:550px;
+object-fit:cover;
+}
+
+.about-text p{
+color:var(--muted);
+max-width:550px;
+}
+
+/* ARTICLES */
+
+.article-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+.article{
+background:white;
+padding-bottom:20px;
+}
+
+.article img{
+width:100%;
+height:240px;
+object-fit:cover;
+}
+
+.article h3,
+.article p{
+margin:12px 20px;
+}
+
+.article p{
+color:var(--muted);
+}
+
+/* CONTACT */
+
+.contact-form{
+max-width:650px;
+margin:auto;
+display:grid;
+gap:15px;
+}
+
+.contact-form input,
+.contact-form textarea{
+width:100%;
+padding:15px;
+border:1px solid #ddd;
+border-radius:5px;
+font:inherit;
+background:white;
+}
+
+.contact-form textarea{
+height:160px;
+resize:vertical;
+}
+
+/* PRODUCT DETAILS */
+
+.product-detail{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.product-detail img{
+width:100%;
+height:600px;
+object-fit:cover;
+}
+
+.product-detail h2{
+font-size:55px;
+font-family:Georgia,serif;
+font-weight:normal;
+}
+
+.product-price{
+font-size:24px;
+color:var(--accent);
+font-weight:bold;
+margin:15px 0;
+}
+
+.product-detail p{
+color:var(--muted);
+}
+
+/* CART */
+
+.cart-container{
+max-width:900px;
+margin:auto;
+}
+
+.cart-item{
+display:grid;
+grid-template-columns:100px 1fr auto;
+align-items:center;
+gap:20px;
+padding:20px 0;
+border-bottom:1px solid #ddd;
+}
+
+.cart-item img{
+width:100px;
+height:100px;
+object-fit:cover;
+}
+
+.remove{
+border:0;
+background:#eee;
+padding:8px 15px;
+border-radius:20px;
+}
+
+.cart-total{
+text-align:right;
+font-size:24px;
+margin-top:30px;
+}
+
+/* NEWSLETTER */
+
+.newsletter{
+background:var(--dark);
+color:white;
+text-align:center;
+}
+
+.newsletter h2{
+font:42px Georgia,serif;
+}
+
+.newsletter p{
+color:#ddd;
+margin:10px 0 25px;
+}
+
+.newsletter input{
+width:300px;
+max-width:80%;
+padding:14px 20px;
+border:0;
+border-radius:30px;
+}
+
+.newsletter button{
+padding:14px 25px;
+border:0;
+border-radius:30px;
+background:var(--pink);
+margin-left:5px;
+}
+
+/* FOOTER */
+
+footer{
+background:#211b1b;
+color:#ccc;
+padding:35px 7%;
+display:flex;
+justify-content:space-between;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+nav{
+display:none;
+position:absolute;
+top:75px;
+left:0;
+right:0;
+background:var(--cream);
+padding:20px;
+flex-direction:column;
+border-bottom:1px solid #ddd;
+}
+
+nav.show{
+display:flex;
+}
+
+.menu{
+display:block;
+}
+
+.hero,
+.about-section,
+.product-detail{
+grid-template-columns:1fr;
+}
+
+.hero-image{
+min-height:450px;
+border-radius:0;
+}
+
+.categories,
+.product-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.article-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:550px){
+
+section{
+padding:60px 5%;
+}
+
+.categories,
+.product-grid{
+grid-template-columns:1fr;
+}
+
+.product-card img{
+height:350px;
+}
+
+h1{
+font-size:55px;
+}
+
+.section-title h2{
+font-size:38px;
+}
+
+.newsletter input{
+margin-bottom:10px;
+}
+
+footer{
+flex-direction:column;
+gap:10px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="logo">LUMÉA</div>
+
+<button class="menu" onclick="toggleMenu()">☰</button>
+
+<nav id="navigation">
+
+<a href="#" onclick="showPage('home')">Home</a>
+
+<a href="#" onclick="showPage('shop')">Shop</a>
+
+<a href="#" onclick="showPage('makeup')">Makeup</a>
+
+<a href="#" onclick="showPage('skincare')">Skincare</a>
+
+<a href="#" onclick="showPage('fragrance')">Fragrance</a>
+
+<a href="#" onclick="showPage('product')">Product</a>
+
+<a href="#" onclick="showPage('about')">About</a>
+
+<a href="#" onclick="showPage('journal')">Journal</a>
+
+<a href="#" onclick="showPage('contact')">Contact</a>
+
+<a href="#" onclick="showPage('cart')" class="cart-link">
+Bag (<span id="cartCount">0</span>)
+</a>
+
+</nav>
+
+</header>
+
+
+
+<!-- ================= HOME ================= -->
+
+<div id="home" class="page active">
+
+<section class="hero">
+
+<div class="hero-content">
+
+<p class="eyebrow">
+Beauty, beautifully simple
+</p>
+
+<h1>
+Glow in your own way.
+</h1>
+
+<p>
+Discover thoughtfully crafted cosmetics designed
+to celebrate your natural beauty and make every
+day feel special.
+</p>
+
+<button class="btn" onclick="showPage('shop')">
+SHOP COLLECTION
+</button>
+
+</div>
+
+<div class="hero-image"></div>
+
+</section>
+
+
+<section>
+
+<div class="section-title">
+
+<p class="eyebrow">DISCOVER</p>
+
+<h2>
+Explore Beauty
+</h2>
+
+<p>
+Everything you need for your beauty ritual.
+</p>
+
+</div>
+
+
+<div class="categories">
+
+<div
+class="category makeup"
+onclick="showPage('makeup')">
+
+<h3>Makeup</h3>
+
+</div>
+
+<div
+class="category skincare"
+onclick="showPage('skincare')">
+
+<h3>Skincare</h3>
+
+</div>
+
+<div
+class="category fragrance"
+onclick="showPage('fragrance')">
+
+<h3>Fragrance</h3>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="about-section">
+
+<img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=900&q=85">
+
+<div class="about-text">
+
+<p class="eyebrow">
+OUR STORY
+</p>
+
+<h2>
+Beauty without compromise.
+</h2>
+
+<p>
+At LUMÉA, we believe beauty should feel effortless.
+Our products combine elegant textures, thoughtful
+formulas and timeless design.
+</p>
+
+<button class="btn" onclick="showPage('about')">
+OUR STORY
+</button>
+
+</div>
+
+</section>
+
+
+<section class="newsletter">
+
+<h2>
+Stay in the glow.
+</h2>
+
+<p>
+Sign up for beauty tips, new launches and exclusive offers.
+</p>
+
+<input
+type="email"
+placeholder="Your email address">
+
+<button onclick="subscribe()">
+SUBSCRIBE
+</button>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= SHOP ================= -->
+
+<div id="shop" class="page">
+
+<section>
+
+<div class="section-title">
+
+<p class="eyebrow">LUMÉA COLLECTION</p>
+
+<h2>
+Shop All Products
+</h2>
+
+<p>
+Discover our beauty essentials.
+</p>
+
+</div>
+
+<div class="product-grid" id="shopProducts"></div>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= MAKEUP ================= -->
+
+<div id="makeup" class="page">
+
+<section>
+
+<div class="section-title">
+
+<p class="eyebrow">MAKEUP</p>
+
+<h2>
+Express Yourself
+</h2>
+
+<p>
+Beautiful colors for every mood.
+</p>
+
+</div>
+
+<div class="product-grid" id="makeupProducts"></div>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= SKINCARE ================= -->
+
+<div id="skincare" class="page">
+
+<section>
+
+<div class="section-title">
+
+<p class="eyebrow">SKINCARE</p>
+
+<h2>
+Your Daily Glow
+</h2>
+
+<p>
+Simple products for your everyday routine.
+</p>
+
+</div>
+
+<div class="product-grid" id="skincareProducts"></div>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= FRAGRANCE ================= -->
+
+<div id="fragrance" class="page">
+
+<section>
+
+<div class="section-title">
+
+<p class="eyebrow">FRAGRANCE</p>
+
+<h2>
+Find Your Signature Scent
+</h2>
+
+<p>
+Elegant fragrances for every occasion.
+</p>
+
+</div>
+
+<div class="product-grid" id="fragranceProducts"></div>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= PRODUCT ================= -->
+
+<div id="product" class="page">
+
+<section>
+
+<div class="product-detail">
+
+<img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=900&q=85">
+
+<div>
+
+<p class="eyebrow">
+LUMÉA SKINCARE
+</p>
+
+<h2>
+Hydra Glow Serum
+</h2>
+
+<div class="product-price">
+$38.00
+</div>
+
+<p>
+Our lightweight daily serum is designed to leave
+skin feeling hydrated, smooth and fresh.
+</p>
+
+<br>
+
+<p>
+<strong>Key features</strong>
+<br><br>
+✓ Lightweight texture
+<br>
+✓ Everyday hydration
+<br>
+✓ Easy to layer
+<br>
+✓ Suitable for daily routines
+</p>
+
+<button
+class="btn"
+onclick="addToCart(2)">
+
+ADD TO BAG
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= ABOUT ================= -->
+
+<div id="about" class="page">
+
+<section class="about-section">
+
+<img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=900&q=85">
+
+<div class="about-text">
+
+<p class="eyebrow">
+ABOUT LUMÉA
+</p>
+
+<h2>
+Made for your everyday glow.
+</h2>
+
+<p>
+LUMÉA began with a simple idea:
+beauty products should feel beautiful to use
+and easy to make part of everyday life.
+</p>
+
+<br>
+
+<p>
+We focus on elegant design, approachable routines
+and products that help you express your own style.
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= JOURNAL ================= -->
+
+<div id="journal" class="page">
+
+<section>
+
+<div class="section-title">
+
+<p class="eyebrow">
+THE BEAUTY JOURNAL
+</p>
+
+<h2>
+Beauty Inspiration
+</h2>
+
+<p>
+Tips, routines and inspiration from LUMÉA.
+</p>
+
+</div>
+
+
+<div class="article-grid">
+
+<article class="article">
+
+<img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=85">
+
+<h3>
+Build a Simple Morning Routine
+</h3>
+
+<p>
+Start with a few consistent steps and let
+your routine work for you.
+</p>
+
+</article>
+
+
+<article class="article">
+
+<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=85">
+
+<h3>
+Everyday Makeup Essentials
+</h3>
+
+<p>
+A minimal makeup collection can take you
+from natural to polished.
+</p>
+
+</article>
+
+
+<article class="article">
+
+<img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=85">
+
+<h3>
+Finding Your Signature Scent
+</h3>
+
+<p>
+Explore fragrance and discover a scent
+that feels like you.
+</p>
+
+</article>
+
+</div>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= CONTACT ================= -->
+
+<div id="contact" class="page">
+
+<section>
+
+<div class="section-title">
+
+<p class="eyebrow">
+CONTACT
+</p>
+
+<h2>
+Get in Touch
+</h2>
+
+<p>
+Have a question? We'd love to hear from you.
+</p>
+
+</div>
+
+
+<form class="contact-form"
+onsubmit="sendMessage(event)">
+
+<input
+type="text"
+placeholder="Your name"
+required>
+
+<input
+type="email"
+placeholder="Email address"
+required>
+
+<input
+type="text"
+placeholder="Subject"
+required>
+
+<textarea
+placeholder="Your message"
+required></textarea>
+
+<button class="btn">
+SEND MESSAGE
+</button>
+
+</form>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= CART ================= -->
+
+<div id="cart" class="page">
+
+<section>
+
+<div class="section-title">
+
+<p class="eyebrow">
+YOUR BAG
+</p>
+
+<h2>
+Shopping Bag
+</h2>
+
+</div>
+
+
+<div class="cart-container">
+
+<div id="cartItems"></div>
+
+<div class="cart-total">
+
+<strong>
+Total: $<span id="cartTotal">0.00</span>
+</strong>
+
+</div>
+
+<button
+class="btn"
+onclick="checkout()">
+
+CHECKOUT
+
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div>
+© 2026 LUMÉA Cosmetics
+</div>
+
+<div>
+Instagram · TikTok · Pinterest
+</div>
+
+</footer>
+
+
+
+<script>
+
+/* ================= PRODUCTS ================= */
+
+const products = [
+
+{
+name:"Silk Glow Foundation",
+price:32,
+category:"makeup",
+image:"https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+},
+
+{
+name:"Rose Petal Blush",
+price:24,
+category:"makeup",
+image:"https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=700&q=85"
+},
+
+{
+name:"Hydra Glow Serum",
+price:38,
+category:"skincare",
+image:"https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=85"
+},
+
+{
+name:"Soft Bloom Perfume",
+price:45,
+category:"fragrance",
+image:"https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=85"
+},
+
+{
+name:"Daily Face Cream",
+price:29,
+category:"skincare",
+image:"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=700&q=85"
+},
+
+{
+name:"Velvet Lip Color",
+price:22,
+category:"makeup",
+image:"https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=85"
+},
+
+{
+name:"Pure Essence",
+price:49,
+category:"fragrance",
+image:"https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=700&q=85"
+},
+
+{
+name:"Glow Cleanser",
+price:25,
+category:"skincare",
+image:"https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=85"
+}
+
+];
+
+
+/* ================= CART ================= */
+
+let cart =
+JSON.parse(localStorage.getItem("lumeaCart")) || [];
+
+
+function saveCart(){
+
+localStorage.setItem(
+"lumeaCart",
+JSON.stringify(cart)
+);
+
+updateCartCount();
+
+renderCart();
+
+}
+
+
+function updateCartCount(){
+
+document.getElementById("cartCount").textContent =
+cart.length;
+
+}
+
+
+/* ================= ADD TO CART ================= */
+
+function addToCart(index){
+
+cart.push(products[index]);
+
+saveCart();
+
+alert(
+products[index].name +
+" has been added to your bag."
+);
+
+showPage("cart");
+
+}
+
+
+/* ================= PRODUCT CARDS ================= */
+
+function createProducts(
+container,
+category="all"
+){
+
+const element =
+document.getElementById(container);
+
+if(!element) return;
+
+let list = products;
+
+if(category !== "all"){
+
+list =
+products.filter(
+product => product.category === category
+);
+
+}
+
+element.innerHTML = "";
+
+list.forEach(product => {
+
+const index =
+products.indexOf(product);
+
+element.innerHTML += `
+
+<div class="product-card">
+
+<img src="${product.image}">
+
+<h3>${product.name}</h3>
+
+<p>$${product.price.toFixed(2)}</p>
+
+<button
+class="btn"
+onclick="addToCart(${index})">
+
+ADD TO BAG
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* ================= CART DISPLAY ================= */
+
+function renderCart(){
+
+const container =
+document.getElementById("cartItems");
+
+if(!container) return;
+
+if(cart.length === 0){
+
+container.innerHTML = `
+<p>Your shopping bag is empty.</p>
+`;
+
+document.getElementById("cartTotal")
+.textContent = "0.00";
+
+return;
+
+}
+
+container.innerHTML = "";
+
+let total = 0;
+
+cart.forEach((product,index) => {
+
+total += product.price;
+
+container.innerHTML += `
+
+<div class="cart-item">
+
+<img src="${product.image || products[2].image}">
+
+<div>
+
+<h3>${product.name}</h3>
+
+<p>$${product.price.toFixed(2)}</p>
+
+</div>
+
+<button
+class="remove"
+onclick="removeItem(${index})">
+
+Remove
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("cartTotal")
+.textContent = total.toFixed(2);
+
+}
+
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+saveCart();
+
+}
+
+
+/* ================= PAGE NAVIGATION ================= */
+
+function showPage(page){
+
+document.querySelectorAll(".page")
+.forEach(section => {
+
+section.classList.remove("active");
+
+});
+
+const selected =
+document.getElementById(page);
+
+if(selected){
+
+selected.classList.add("active");
+
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+document.getElementById("navigation")
+.classList.remove("show");
+
+}
+
+
+/* ================= MOBILE MENU ================= */
+
+function toggleMenu(){
+
+document
+.getElementById("navigation")
+.classList.toggle("show");
+
+}
+
+
+/* ================= NEWSLETTER ================= */
+
+function subscribe(){
+
+alert(
+"Thank you for joining the LUMÉA community!"
+);
+
+}
+
+
+/* ================= CONTACT ================= */
+
+function sendMessage(event){
+
+event.preventDefault();
+
+alert(
+"Thank you! Your message has been received."
+);
+
+event.target.reset();
+
+}
+
+
+/* ================= CHECKOUT ================= */
+
+function checkout(){
+
+if(cart.length === 0){
+
+alert("Your bag is empty.");
+
+return;
+
+}
+
+alert(
+"Thank you for shopping with LUMÉA!"
+);
+
+cart = [];
+
+saveCart();
+
+showPage("home");
+
+}
+
+
+/* ================= START WEBSITE ================= */
+
+createProducts("shopProducts");
+
+createProducts(
+"makeupProducts",
+"makeup"
+);
+
+createProducts(
+"skincareProducts",
+"skincare"
+);
+
+createProducts(
+"fragranceProducts",
+"fragrance"
+);
+
+updateCartCount();
+
+renderCart();
+
+</script>
+
+</body>
+</html>
